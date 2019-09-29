@@ -2,11 +2,11 @@ import random
 from PIL import Image, ImageChops
 import numpy as np
 
-
+# add or sub a integer randomly
 def randomize_offset(base, bias=10):
     return base + random.randint(-1 * bias, bias)
 
-
+# scale randomly
 def randomize_scale(base, bias=0.3):
     return base * random.uniform(1 - bias, 1 + bias)
 

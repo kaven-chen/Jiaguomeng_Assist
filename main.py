@@ -55,6 +55,7 @@ class Assistor():
         self.adb.tap(self.upgrade_location)
         self.medium_sleep()
 
+    # Return True if current frame is the same (probably) as dest image.
     def is_same_frame(self, dest):
         self.adb.get_screenshot('current.png')
         if calc_image_similarity('current.png', dest) > self.same_image_threshhod:
@@ -68,7 +69,7 @@ class Assistor():
     def try_navigating_to_building(self):
         for _ in range(3):
             self.adb.tap(self.building_menu_location)
-            self.short_sleep()
+            self.medium_sleep()
             if self.is_same_frame('building.png'):
                 return True
             self.medium_sleep()
@@ -80,7 +81,7 @@ class Assistor():
     def try_navigating_to_shop(self):
         for _ in range(3):
             self.adb.tap(self.shop_menu_location)
-            self.short_sleep()
+            self.medium_sleep()
             if self.is_same_frame('shop.png'):
                 return True
             self.medium_sleep()
@@ -108,14 +109,16 @@ class Assistor():
                 self.bogo_click()
 
     def run(self):
+        # Get initial "building window" image for checking similarity later
         self.navigate_to_building()
-        self.short_sleep()
-        self.adb.get_screenshot('building.png')
-
         self.medium_sleep()
-
+        self.adb.get_screenshot('building.png')
+        
+        self.medium_sleep()
+        
+        # Get initial "shop window" image for checking similarity later
         self.navigate_to_shop()
-        self.short_sleep()
+        self.medium_sleep()
         self.adb.get_screenshot('shop.png')
         while True:
             # Do something in main window
