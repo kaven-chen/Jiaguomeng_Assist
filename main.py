@@ -148,7 +148,7 @@ class Assistor():
             print('Hongbao {} BGR: '.format(i + 1), list(map(int, x)))
             if red_channel < 160:
                 print('Hongbao {} is available.'.format(i + 1))
-                for _ in range(6):
+                for _ in range(10):
                     self.adb.tap(self.hongbao_location[i])
                     self.medium_sleep()
                     self.bogo_click()
@@ -163,7 +163,7 @@ class Assistor():
         print('Album BGR: ', list(map(int, x)))
         if red_channel < 160:
             print('Album is available.')
-            for _ in range(6):
+            for _ in range(10):
                 self.adb.tap(self.album_location)
                 self.medium_sleep()
                 self.click_for_cancel_album()
