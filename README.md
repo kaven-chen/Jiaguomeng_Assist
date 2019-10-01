@@ -21,47 +21,74 @@
 
 使用了夜神模拟器，设置了竖屏显示、分辨率 1080P。游戏版本 V1.2.3。
 
-演示时终端的输出（只运行了一个 cycle）：
+终端输出：
 
 ```
 C:\Users\Yu\Documents\GitHub\Jiaguomeng_Assist>python main.py
-/sdcard/building.png: 1 file pulled. 3.3 MB/s (2348628 bytes in 0.685s)
-/sdcard/shop.png: 1 file pulled. 3.2 MB/s (1020512 bytes in 0.305s)
-/sdcard/current.png: 1 file pulled. 3.0 MB/s (2354959 bytes in 0.759s)
-current.png and building.png similarity 0.959490981867284
-/sdcard/temp_not_pressed.png: 1 file pulled. 2.4 MB/s (2349754 bytes in 0.939s)
-/sdcard/temp_pressed.png: 1 file pulled. 2.3 MB/s (2385693 bytes in 0.999s)
-Original green channel:  [152, 131, 160, 135, 141, 144, 155, 135, 146]
-Current green channel:   [154, 129, 161, 178, 145, 146, 158, 139, 147]
+Successfully navigated to building windows.
+
+Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
+Current green channel:   [153, 131, 153, 141, 130, 149, 146, 142, 153]
+Zero or multiple available targets found for cargo 1. Abandoned.
+
+Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
+Current green channel:   [153, 132, 153, 142, 131, 148, 146, 143, 154]
+Zero or multiple available targets found for cargo 2. Abandoned.
+
+Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
+Current green channel:   [153, 132, 153, 143, 130, 149, 146, 143, 154]
+Zero or multiple available targets found for cargo 3. Abandoned.
+
+Policy available. Begin updating policy.
+Developing...
+
+No new hongbao or album found.
+
+Cycle 1 finished. Sleep for some time to start new cycle.
+
+Successfully navigated to building windows.
+
+Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
+Current green channel:   [154, 132, 154, 145, 133, 148, 147, 146, 191]
+Building 9 is the target. Begin transporting...
+
+Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
+Current green channel:   [155, 133, 155, 184, 135, 149, 148, 147, 154]
 Building 4 is the target. Begin transporting...
 
-/sdcard/temp_pressed.png: 1 file pulled. 3.4 MB/s (2367288 bytes in 0.662s)
-Original green channel:  [152, 131, 160, 135, 141, 144, 155, 135, 146]
-Current green channel:   [194, 132, 162, 138, 148, 145, 158, 136, 148]
-Building 1 is the target. Begin transporting...
+Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
+Current green channel:   [154, 135, 187, 144, 134, 152, 149, 144, 156]
+Building 3 is the target. Begin transporting...
 
-/sdcard/temp_pressed.png: 1 file pulled. 3.4 MB/s (2330202 bytes in 0.659s)
-Original green channel:  [152, 131, 160, 135, 141, 144, 155, 135, 146]
-Current green channel:   [153, 131, 160, 132, 143, 144, 156, 134, 145]
-No available target found for cargo 3.
+Policy available. Begin updating policy.
+Developing...
 
-/sdcard/temp.png: 1 file pulled. 3.6 MB/s (2338479 bytes in 0.620s)
-Found new hongbao or album.
-/sdcard/current.png: 1 file pulled. 3.2 MB/s (1041396 bytes in 0.306s)
-current.png and shop.png similarity 0.884136043595679
-/sdcard/current_shop.png: 1 file pulled. 3.3 MB/s (1028167 bytes in 0.293s)
-Hongbao 1 BGR:  [144, 194, 125]
-Hongbao 1 is available.
+No new hongbao or album found.
 
-Hongbao 2 BGR:  [137, 190, 117]
-Hongbao 2 is available.
+Cycle 2 finished. Sleep for some time to start new cycle.
 
-Hongbao 3 BGR:  [157, 196, 223]
-Hongbao 3 is not available.
+Successfully navigated to building windows.
 
-Album BGR:  [188, 207, 177]
-Album is not available.
-Cycle finished. Sleep for some time to start new cycle.
+Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
+Current green channel:   [155, 133, 155, 145, 134, 150, 184, 144, 155]
+Building 7 is the target. Begin transporting...
+
+Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
+Current green channel:   [155, 134, 154, 146, 176, 150, 147, 146, 159]
+Building 5 is the target. Begin transporting...
+
+Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
+Current green channel:   [153, 132, 153, 143, 132, 147, 146, 144, 155]
+Zero or multiple available targets found for cargo 3. Abandoned.
+
+Policy available. Begin updating policy.
+Developing...
+
+No new hongbao or album found.
+
+Cycle 3 finished. Sleep for some time to start new cycle.
+
+......
 ```
 
 **加速版**
