@@ -1,5 +1,4 @@
 import subprocess
-import os
 import time
 import multiprocessing
 from utility import randomize_offset, randomize_scale
@@ -25,8 +24,10 @@ class Adb():
         '''
         Get screenshot and save as 'filename'
         '''
-        os.system('adb shell screencap -p /sdcard/{}'.format(filename))
-        os.system('adb pull /sdcard/{}'.format(filename))
+        subprocess.check_output(
+            'adb shell screencap -p /sdcard/{}'.format(filename), shell=True)
+        subprocess.check_output(
+            'adb pull /sdcard/{}'.format(filename), shell=True)
 
     def get_screenshot_while_touching(self, filename, location, pressed_time=6):
         '''
@@ -48,7 +49,9 @@ class Adb():
         '''
         if with_bias:
             location = map(randomize_offset, location)
-        os.system('adb shell input touchscreen tap {} {}'.format(*location))
+
+        subprocess.check_output(
+            'adb shell input touchscreen tap {} {}'.format(*location), shell=True)
 
     def tap_continuously(self, location, duration):
         '''
@@ -71,9 +74,9 @@ class Adb():
             start = map(randomize_offset, start)
             end = map(randomize_offset, end)
             duration = int(randomize_scale(duration))
-        os.system('adb shell input touchscreen swipe {} {} {} {} {}'.format(
-            *start, *end, duration
-        ))
+
+        subprocess.check_output('adb shell input touchscreen swipe {} {} {} {} {}'.format(
+            *start, *end, duration), shell=True)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# Jaiguomeng Assistor
+# Jiaguomeng Assistor
 
 > 使用 Python 和 Adb 工具编写的《家国梦》辅助脚本，能够自动收集金币、升级建筑、运输货物、点击商店中的红包和相册。本脚本中自带的配置文件仅用于分辨率为 1080P 的设备。
 

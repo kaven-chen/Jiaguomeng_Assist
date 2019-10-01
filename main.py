@@ -26,7 +26,8 @@ class Assistor():
         self.new_hongbao_and_album_prompt_color = NEW_HONGBAO_AND_ALBUM_PROMPT_COLOR
         self.building_area_offset = BUILDING_AREA_OFFSET
         self.hongbao_area_location = HONGBAO_AREA_LOCATION
-        self.album_area_location = ALBUM__AREA_LOCATION
+        self.album_area_location = ALBUM_AREA_LOCATION
+        self.new_hongbao_and_album_red_channel_threshold = NEW_HONGBAO_AND_ALBUM_RED_CHANNEL_THRESHOLD
 
     def short_sleep(self):
         time.sleep(randomize_scale(self.short_interval))
@@ -107,10 +108,7 @@ class Assistor():
         '''
         self.adb.get_screenshot('current.png')
         self.medium_sleep()
-        if calc_image_similarity('current.png', dest) > self.same_image_threshold:
-            return True
-        else:
-            return False
+        return calc_image_similarity('current.png', dest) > self.same_image_threshold
 
     def navigate_to_building(self):
         self.adb.tap(self.building_menu_location)
@@ -129,6 +127,7 @@ class Assistor():
             if self.is_same_frame('building.png'):
                 return True
             self.medium_sleep()
+
         return False
 
     def navigate_to_shop(self):
@@ -141,6 +140,7 @@ class Assistor():
             if self.is_same_frame('shop.png'):
                 return True
             self.medium_sleep()
+
         return False
 
     def bogo_click(self):
@@ -167,7 +167,7 @@ class Assistor():
                 'current_shop.png', self.hongbao_area_location[i])
             red_channel = x[2]
             print('Hongbao {} BGR: '.format(i + 1), list(map(int, x)))
-            if red_channel < 160:
+            if red_channel < self.new_hongbao_and_album_red_channel_threshold:
                 # Why just check red channel instead of green channel?
                 # At first, I did so but it seems green channel value is nearly the same
                 # between clickable and unclickable hongbao or album
@@ -191,7 +191,7 @@ class Assistor():
             'current_shop.png', self.album_area_location)
         red_channel = x[2]
         print('Album BGR: ', list(map(int, x)))
-        if red_channel < 160:
+        if red_channel < self.new_hongbao_and_album_red_channel_threshold:
             # Check red channel instead of green is practicable, already explained about 15 lines above.
             print('Album is available.')
             for _ in range(10):
@@ -216,6 +216,16 @@ class Assistor():
         # TODO
         return True
 
+    def update_policy(self):
+        # Tap to policy window
+        self.medium_sleep()
+        # click
+
+        # Close policy window
+
+        # TODO
+        print('Developing...')
+
     def run(self):
         # Get initial "building window" image for checking similarity later
         self.navigate_to_building()
@@ -229,10 +239,15 @@ class Assistor():
         self.medium_sleep()
         self.adb.get_screenshot('shop.png')
         self.medium_sleep()
+
+        count = 1
         while True:
             if self.try_navigating_to_building() == False:
                 print('Error when navigating to building windows.')
                 break
+            else:
+                print('Successfully navigated to building windows.')
+            print('')
 
             self.collect_money()
             self.upgrade_building()
@@ -244,8 +259,11 @@ class Assistor():
             self.medium_sleep()
 
             if self.policy_update_available():
-                pass
-                # TODO
+                print('Policy available. Begin updating policy.')
+                self.update_policy()
+            else:
+                print('Policy not available.')
+            print('')
 
             self.medium_sleep()
 
@@ -254,11 +272,18 @@ class Assistor():
                 if self.try_navigating_to_shop() == False:
                     print('Error when navigating to shop windows.')
                     break
+                else:
+                    print('Successfully navigated to shop windows.')
+
                 self.click_hongbao_and_album()
             else:
                 print('No new hongbao or album found.')
 
-            print('Cycle finished. Sleep for some time to start new cycle.')
+            print('')
+            print(
+                'Cycle {} finished. Sleep for some time to start new cycle.'.format(count))
+            print('')
+            count += 1
             self.long_sleep()
 
 

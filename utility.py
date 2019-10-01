@@ -27,7 +27,7 @@ def calc_image_similarity(image_one, image_two):
     im2 = Image.open(image_two)
     diff = np.asarray(ImageChops.difference(im1, im2))
     similarity = 1 - np.count_nonzero(diff) / diff.size
-    print('{} and {} similarity {}'.format(image_one, image_two, similarity))
+    # print('{} and {} similarity {}'.format(image_one, image_two, similarity))
     return similarity
 
 
