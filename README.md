@@ -160,3 +160,9 @@ cd Jiaguomeng_Assist
 python main.py --off_PC=True
 ```
 
+#### How to restore Adb
+```
+setprop service.adb.tcp.port -1
+stop adbd
+start adbd
+```

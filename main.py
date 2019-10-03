@@ -83,9 +83,6 @@ class Assistor():
             else:
                 print(
                     'Zero or multiple available targets found for cargo {}. Abandoned.'.format(i + 1))
-                # if former location has no goods, 
-                # then probably latter has no goods too. So just break.
-                break
 
             print('')
 
@@ -299,9 +296,8 @@ class Assistor():
 
             print('')
             print(
-                'Cycle {} finished. Sleep for some time to start new cycle.\n'.format(count))
+                'Cycle {} finished.\n'.format(count))
             count += 1
-            self.long_sleep()
 
 
 if __name__ == '__main__':
