@@ -25,64 +25,82 @@
 
 ```
 C:\Users\Yu\Documents\GitHub\Jiaguomeng_Assist>python main.py
-Successfully navigated to building windows.
+Successfully navigated to building window.
 
-Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
-Current green channel:   [153, 131, 153, 141, 130, 149, 146, 142, 153]
+Begin collecting money.
+
+Begin upgrading building.
+
+Try transporting goods.
+
+Original green channel:  [145, 119, 151, 143, 136, 141, 130, 138, 152]
+Current green channel:   [153, 120, 150, 143, 136, 141, 127, 137, 153]
 Zero or multiple available targets found for cargo 1. Abandoned.
 
-Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
-Current green channel:   [153, 132, 153, 142, 131, 148, 146, 143, 154]
+Original green channel:  [145, 119, 151, 143, 136, 141, 130, 138, 152]
+Current green channel:   [153, 121, 151, 141, 134, 140, 130, 137, 153]
 Zero or multiple available targets found for cargo 2. Abandoned.
 
-Original green channel:  [153, 132, 153, 140, 132, 147, 145, 143, 154]
-Current green channel:   [153, 132, 153, 143, 130, 149, 146, 143, 154]
+Original green channel:  [145, 119, 151, 143, 136, 141, 130, 138, 152]
+Current green channel:   [145, 117, 151, 141, 136, 141, 130, 138, 153]
 Zero or multiple available targets found for cargo 3. Abandoned.
 
 Policy available. Begin updating policy.
-Developing...
+In developing...
 
 No new hongbao or album found.
 
 Cycle 1 finished. Sleep for some time to start new cycle.
 
-Successfully navigated to building windows.
+Successfully navigated to building window.
 
-Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
-Current green channel:   [154, 132, 154, 145, 133, 148, 147, 146, 191]
-Building 9 is the target. Begin transporting...
+Begin collecting money.
 
-Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
-Current green channel:   [155, 133, 155, 184, 135, 149, 148, 147, 154]
-Building 4 is the target. Begin transporting...
+Begin upgrading building.
 
-Original green channel:  [153, 132, 153, 143, 132, 149, 145, 143, 155]
-Current green channel:   [154, 135, 187, 144, 134, 152, 149, 144, 156]
-Building 3 is the target. Begin transporting...
+Try transporting goods.
+
+Original green channel:  [144, 119, 150, 143, 135, 142, 130, 138, 153]
+Current green channel:   [152, 121, 150, 143, 137, 142, 130, 137, 153]
+Zero or multiple available targets found for cargo 1. Abandoned.
+
+Original green channel:  [144, 119, 150, 143, 135, 142, 130, 138, 153]
+Current green channel:   [145, 119, 150, 142, 137, 142, 127, 136, 152]
+Zero or multiple available targets found for cargo 2. Abandoned.
+
+Original green channel:  [144, 119, 150, 143, 135, 142, 130, 138, 153]
+Current green channel:   [145, 119, 151, 143, 136, 141, 130, 138, 153]
+Zero or multiple available targets found for cargo 3. Abandoned.
 
 Policy available. Begin updating policy.
-Developing...
+In developing...
 
 No new hongbao or album found.
 
 Cycle 2 finished. Sleep for some time to start new cycle.
 
-Successfully navigated to building windows.
+Successfully navigated to building window.
 
-Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
-Current green channel:   [155, 133, 155, 145, 134, 150, 184, 144, 155]
-Building 7 is the target. Begin transporting...
+Begin collecting money.
 
-Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
-Current green channel:   [155, 134, 154, 146, 176, 150, 147, 146, 159]
-Building 5 is the target. Begin transporting...
+Begin upgrading building.
 
-Original green channel:  [153, 131, 153, 142, 132, 149, 145, 143, 155]
-Current green channel:   [153, 132, 153, 143, 132, 147, 146, 144, 155]
+Try transporting goods.
+
+Original green channel:  [145, 118, 151, 142, 139, 141, 130, 137, 153]
+Current green channel:   [152, 121, 151, 142, 137, 141, 130, 136, 152]
+Zero or multiple available targets found for cargo 1. Abandoned.
+
+Original green channel:  [145, 118, 151, 142, 139, 141, 130, 137, 153]
+Current green channel:   [145, 119, 150, 143, 132, 140, 130, 136, 152]
+Zero or multiple available targets found for cargo 2. Abandoned.
+
+Original green channel:  [145, 118, 151, 142, 139, 141, 130, 137, 153]
+Current green channel:   [145, 119, 151, 140, 137, 141, 129, 137, 153]
 Zero or multiple available targets found for cargo 3. Abandoned.
 
 Policy available. Begin updating policy.
-Developing...
+In developing...
 
 No new hongbao or album found.
 
@@ -100,3 +118,44 @@ Cycle 3 finished. Sleep for some time to start new cycle.
 由于文件过大，故用了外链，点击下载。
 
 https://yusanshi.com/jgm.gif
+
+## 补充
+
+> 也可以只用手机、脱离电脑（即在手机上让该脚本在后台运行、游戏在前台运行）。
+
+基本思路：使用 Termux 运行脚本，在 Termux 中配置好 Python、~~OpenCV~~、Pillow、Adb 等。
+
+~~我的方案如下：~~
+
+- 安装 Termux；
+- 在 Termux 安装配置 NumPy、OpenCV、Pillow 等包，其中 ~~~OpenCV [这样安装](https://wiki.termux.com/wiki/Instructions_for_installing_python_packages#opencv)~~~，而 Pillow 依赖的库在以上安装 OpenCV 的过程已经安装了，因此先安装完 OpenCV，直接 Pip 安装 Pillow 即可；
+- 配置 Adb：https://github.com/MasterDevX/Termux-ADB。
+
+### 新方案
+
+#### Adb
+
+```
+pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh
+
+
+su
+
+# see: https://stackoverflow.com/questions/2604727/how-can-i-connect-to-android-with-adb-over-tcp
+
+setprop service.adb.tcp.port 5555
+stop adbd
+start adbd
+exit
+
+adb connect localhost:5555
+adb devices
+```
+
+### Pillow
+
+```
+pkg install clang libjpeg-turbo
+pkg install Pillow
+```
+

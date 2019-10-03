@@ -28,6 +28,7 @@ class Adb():
             'adb shell screencap -p /sdcard/{}'.format(filename), shell=True)
         subprocess.check_output(
             'adb pull /sdcard/{}'.format(filename), shell=True)
+        # print('Get screenshot {}'.format(filename))
 
     def get_screenshot_while_touching(self, filename, location, pressed_time=6):
         '''

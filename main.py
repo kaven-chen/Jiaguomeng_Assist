@@ -28,6 +28,7 @@ class Assistor():
         self.hongbao_area_location = HONGBAO_AREA_LOCATION
         self.album_area_location = ALBUM_AREA_LOCATION
         self.new_hongbao_and_album_red_channel_threshold = NEW_HONGBAO_AND_ALBUM_RED_CHANNEL_THRESHOLD
+        self.upgrade_priority = UPGRADE_PRIORITY
 
     def short_sleep(self):
         time.sleep(randomize_scale(self.short_interval))
@@ -91,13 +92,17 @@ class Assistor():
             self.short_sleep()
 
     def upgrade_building(self):
+        '''
+        Upgrade a building seleted from all buildings
+        according to 'upgrade_priority'
+        '''
         self.adb.tap(self.upgrade_location)
         self.medium_sleep()
-        for location in shuffle_list(self.building_location):
-            self.adb.tap(location)
-            for _ in range(3):
-                self.adb.tap(self.upgrade_confirm_location)
-                self.short_sleep()
+        self.adb.tap(choice_from_a_list(
+            self.building_location, self.upgrade_priority))
+        for _ in range(5):
+            self.adb.tap(self.upgrade_confirm_location)
+            self.short_sleep()
 
         self.medium_sleep()
         self.adb.tap(self.upgrade_location)
@@ -165,8 +170,8 @@ class Assistor():
         for i in range(3):
             x = analyse_part_of_image(
                 'current_shop.png', self.hongbao_area_location[i])
-            red_channel = x[2]
-            print('Hongbao {} BGR: '.format(i + 1), list(map(int, x)))
+            red_channel = x[0]
+            print('Hongbao {} RGB: '.format(i + 1), list(map(int, x)))
             if red_channel < self.new_hongbao_and_album_red_channel_threshold:
                 # Why just check red channel instead of green channel?
                 # At first, I did so but it seems green channel value is nearly the same
@@ -189,8 +194,8 @@ class Assistor():
 
         x = analyse_part_of_image(
             'current_shop.png', self.album_area_location)
-        red_channel = x[2]
-        print('Album BGR: ', list(map(int, x)))
+        red_channel = x[0]
+        print('Album RGB: ', list(map(int, x)))
         if red_channel < self.new_hongbao_and_album_red_channel_threshold:
             # Check red channel instead of green is practicable, already explained about 15 lines above.
             print('Album is available.')
@@ -224,7 +229,7 @@ class Assistor():
         # Close policy window
 
         # TODO
-        print('Developing...')
+        print('In developing...')
 
     def run(self):
         # Get initial "building window" image for checking similarity later
@@ -243,17 +248,21 @@ class Assistor():
         count = 1
         while True:
             if self.try_navigating_to_building() == False:
-                print('Error when navigating to building windows.')
+                print('Error when navigating to building window.')
                 break
             else:
-                print('Successfully navigated to building windows.')
-            print('')
+                print('Successfully navigated to building window.')
 
+            print('')
+            print('Begin collecting money.\n')
             self.collect_money()
+
+            print('Begin upgrading building.\n')
             self.upgrade_building()
 
             self.medium_sleep()
 
+            print('Try transporting goods.\n')
             self.try_transporting_goods()
 
             self.medium_sleep()
@@ -263,17 +272,17 @@ class Assistor():
                 self.update_policy()
             else:
                 print('Policy not available.')
-            print('')
 
+            print('')
             self.medium_sleep()
 
             if self.has_new_hongbao_or_album():
                 print('Found new hongbao or album.')
                 if self.try_navigating_to_shop() == False:
-                    print('Error when navigating to shop windows.')
+                    print('Error when navigating to shop window.')
                     break
                 else:
-                    print('Successfully navigated to shop windows.')
+                    print('Successfully navigated to shop window.')
 
                 self.click_hongbao_and_album()
             else:
@@ -281,8 +290,7 @@ class Assistor():
 
             print('')
             print(
-                'Cycle {} finished. Sleep for some time to start new cycle.'.format(count))
-            print('')
+                'Cycle {} finished. Sleep for some time to start new cycle.\n'.format(count))
             count += 1
             self.long_sleep()
 
