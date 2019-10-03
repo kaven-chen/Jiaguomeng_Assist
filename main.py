@@ -3,10 +3,12 @@ from config_1080x1920 import *
 from utility import *
 import time
 import numpy as np
+import argparse
 
 
 class Assistor():
-    def __init__(self):
+    def __init__(self, off_PC):
+        self.off_PC = off_PC
         self.adb = Adb()
         self.building_location = BUILDING_LOCATION
         self.goods_location = GOODS_LOCATION
@@ -57,12 +59,10 @@ class Assistor():
 
     def try_transporting_goods(self):
         self.adb.get_screenshot('temp_not_pressed.png')
-        self.medium_sleep()
         origin = self.get_green_channel_value_of_buildings(
             'temp_not_pressed.png')
         for i, start in enumerate(self.goods_location):
             self.adb.get_screenshot_while_touching('temp_pressed.png', start)
-            self.medium_sleep()
             current = self.get_green_channel_value_of_buildings(
                 'temp_pressed.png')
             print('Original green channel:\t', list(map(int, origin)))
@@ -83,6 +83,9 @@ class Assistor():
             else:
                 print(
                     'Zero or multiple available targets found for cargo {}. Abandoned.'.format(i + 1))
+                # if former location has no goods, 
+                # then probably latter has no goods too. So just break.
+                break
 
             print('')
 
@@ -232,6 +235,12 @@ class Assistor():
         print('In developing...')
 
     def run(self):
+        if self.off_PC:
+            print('Sleep some time. Switch to game window quickly!')
+            for i in range(10):
+                print('{} seconds left.'.format(10 - i))
+                time.sleep(1)
+
         # Get initial "building window" image for checking similarity later
         self.navigate_to_building()
         self.medium_sleep()
@@ -296,5 +305,10 @@ class Assistor():
 
 
 if __name__ == '__main__':
-    assistor = Assistor()
+    parser = argparse.ArgumentParser(
+        description='Jiaguomeng Assistor.')
+    parser.add_argument(
+        "--off_PC", type=bool, default=False, help="If you use Adb on phone to debug itself (without PC), set it to 'True' to have some time to switch to game window.")
+    args = parser.parse_args()
+    assistor = Assistor(args.off_PC)
     assistor.run()

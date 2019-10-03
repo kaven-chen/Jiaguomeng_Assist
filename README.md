@@ -125,37 +125,38 @@ https://yusanshi.com/jgm.gif
 
 基本思路：使用 Termux 运行脚本，在 Termux 中配置好 Python、~~OpenCV~~、Pillow、Adb 等。
 
-~~我的方案如下：~~
+### 旧方案
 
 - 安装 Termux；
-- 在 Termux 安装配置 NumPy、OpenCV、Pillow 等包，其中 ~~~OpenCV [这样安装](https://wiki.termux.com/wiki/Instructions_for_installing_python_packages#opencv)~~~，而 Pillow 依赖的库在以上安装 OpenCV 的过程已经安装了，因此先安装完 OpenCV，直接 Pip 安装 Pillow 即可；
+- 在 Termux 安装配置 NumPy、~~OpenCV~~、Pillow 等包，其中 OpenCV [这样安装](https://wiki.termux.com/wiki/Instructions_for_installing_python_packages#opencv)，而 Pillow 依赖的库在以上安装 OpenCV 的过程已经安装了，因此先安装完 OpenCV，直接 Pip 安装 Pillow 即可；
 - 配置 Adb：https://github.com/MasterDevX/Termux-ADB。
+
+> 由于 Termux 上安装 OpenCV 这个过程太艰难，我放弃了。故我把程序简单改了一下，不再使用 OpenCV，而是只用 Pillow。
 
 ### 新方案
 
-#### Adb
+#### 配置
 
 ```
 pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && bash InstallTools.sh
 
+pkg install clang libjpeg-turbo
+pip install Pillow numpy
+```
 
+#### 运行
+```
 su
-
 # see: https://stackoverflow.com/questions/2604727/how-can-i-connect-to-android-with-adb-over-tcp
-
 setprop service.adb.tcp.port 5555
 stop adbd
 start adbd
 exit
 
 adb connect localhost:5555
-adb devices
-```
+adb devices # Make sure localhost is in list and is the only one.
 
-### Pillow
-
-```
-pkg install clang libjpeg-turbo
-pkg install Pillow
+cd Jiaguomeng_Assist
+python main.py --off_PC=True
 ```
 
