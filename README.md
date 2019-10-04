@@ -147,10 +147,7 @@ pip install Pillow numpy
 #### 运行
 ```
 su
-# see: https://stackoverflow.com/questions/2604727/how-can-i-connect-to-android-with-adb-over-tcp
-setprop service.adb.tcp.port 5555
-stop adbd
-start adbd
+sh adb_tcp.sh
 exit
 
 adb connect localhost:5555
@@ -158,11 +155,11 @@ adb devices # Make sure localhost is in list and is the only one.
 
 cd Jiaguomeng_Assist
 python main.py --off_PC=True
+
+
+# after ending manually
+su
+sh adb_usb.sh
+exit
 ```
 
-#### How to restore Adb
-```
-setprop service.adb.tcp.port -1
-stop adbd
-start adbd
-```
