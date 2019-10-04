@@ -142,20 +142,22 @@ pkg install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/Ins
 
 pkg install clang libjpeg-turbo
 pip install Pillow numpy
+
+git clone https://github.com/yusanshi/Jiaguomeng_Assist
 ```
 
 #### 运行
 ```
+cd Jiaguomeng_Assist
+
 su
 sh adb_tcp.sh
 exit
 
-adb connect localhost:5555
+adb connect localhost:5555 # Touch "allow" if this is a dialog.
 adb devices # Make sure localhost is in list and is the only one.
 
-cd Jiaguomeng_Assist
 python main.py --off_PC=True
-
 
 # after ending manually
 su
